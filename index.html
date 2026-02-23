@@ -831,9 +831,7 @@
             form.addEventListener('submit', handleFormSubmit);
         }
     });
-</script>
 
-<script>
     /* =============================================
        IFRAME HEIGHT COMMUNICATION (for Showit embed)
        ============================================= */
@@ -841,7 +839,7 @@
         var root = document.getElementById('consultation-form-root');
         root.style.height = 'auto';
         document.body.style.height = 'auto';
-
+        document.documentElement.style.height = 'auto';
         void root.offsetHeight;
         var h = Math.max(root.scrollHeight, root.offsetHeight, document.body.scrollHeight);
         h = Math.ceil(h);
