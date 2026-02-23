@@ -827,5 +827,17 @@
     });
 </script>
 
+<script>
+    /* ── AUTO-RESIZE IFRAME ── */
+    function sendHeight() {
+        var height = document.body.scrollHeight;
+        window.parent.postMessage({ formHeight: height }, '*');
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+    new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+    setInterval(sendHeight, 500);
+</script>
+
 </body>
 </html>
