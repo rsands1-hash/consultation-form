@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            height: auto !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -564,7 +570,7 @@
 </head>
 <body>
 
-<div class="form-container">
+<div class="form-container" id="consultation-form-root">
     <form id="weddingForm" action="https://formspree.io/f/movlykze" method="POST">
         <input type="hidden" name="_subject" value="New Wedding Photography Inquiry">
         <input type="hidden" name="_cc" value="">
@@ -828,15 +834,25 @@
 </script>
 
 <script>
-    /* ── AUTO-RESIZE IFRAME ── */
+    /* =============================================
+       IFRAME HEIGHT COMMUNICATION (for Showit embed)
+       ============================================= */
     function sendHeight() {
-        var height = document.body.scrollHeight;
-        window.parent.postMessage({ formHeight: height }, '*');
+        var root = document.getElementById('consultation-form-root');
+        root.style.height = 'auto';
+        document.body.style.height = 'auto';
+
+        void root.offsetHeight;
+        var h = Math.max(root.scrollHeight, root.offsetHeight, document.body.scrollHeight);
+        h = Math.ceil(h);
+        window.parent.postMessage({calcHeight: h}, '*');
     }
-    window.addEventListener('load', sendHeight);
-    window.addEventListener('resize', sendHeight);
-    new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
-    setInterval(sendHeight, 500);
+    window.addEventListener('load', function() {
+        sendHeight();
+        setInterval(sendHeight, 300);
+        var observer = new MutationObserver(function() { setTimeout(sendHeight, 0); });
+        observer.observe(document.getElementById('consultation-form-root'), {childList: true, subtree: true});
+    });
 </script>
 
 </body>
