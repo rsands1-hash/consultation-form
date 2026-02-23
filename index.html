@@ -152,11 +152,81 @@
             margin: 24px 0;
         }
 
+        /* ── CREDIT CHECKBOX ── */
+        .credit-checkbox-wrapper {
+            width: 100%;
+            margin-bottom: 18px;
+        }
+
+        .credit-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 20px;
+            border: 2.5px solid #e8e0ec;
+            border-radius: 24px;
+            background: #d4daff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            color: #3a2d40;
+            font-weight: 500;
+        }
+
+        .credit-checkbox-label:hover {
+            border-color: #c09acc;
+        }
+
+        .credit-checkbox-wrapper input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .credit-check-circle {
+            width: 22px;
+            height: 22px;
+            border: 2.5px solid #d0c0d6;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            font-weight: 700;
+            color: transparent;
+        }
+
+        .credit-checkbox-wrapper input[type="checkbox"]:checked + .credit-checkbox-label .credit-check-circle {
+            background: #c09acc;
+            border-color: #c09acc;
+            color: #fff;
+        }
+
+        .credit-checkbox-wrapper input[type="checkbox"]:checked + .credit-checkbox-label {
+            border-color: #c09acc;
+        }
+
         /* ── SECTION LABEL ── */
         .section-label {
             color: #d44aad;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .section-label + .section-subtitle {
+            color: #9b8a9f;
+            font-size: 0.85rem;
+            font-weight: 400;
+            margin-bottom: 14px;
+        }
+
+        .section-label:not(:has(+ .section-subtitle)) {
             margin-bottom: 14px;
         }
 
@@ -499,8 +569,17 @@
         <input type="hidden" name="_subject" value="New Wedding Photography Inquiry">
         <input type="hidden" name="_cc" value="">
 
+        <!-- CREDIT CHECKBOX -->
+        <div class="credit-checkbox-wrapper">
+            <input type="checkbox" id="credit-booking" name="creditBooking" value="yes" checked>
+            <label for="credit-booking" class="credit-checkbox-label">
+                <span class="credit-check-circle">&#10003;</span>
+                Yes, I'd like to book my free consultation and earn a $100 credit.
+            </label>
+        </div>
+
         <!-- COUPLE INFO -->
-        <div class="section-label">About You</div>
+        <div class="section-label">Your Details</div>
         <div class="form-row">
             <div class="form-group">
                 <label for="bride-name" class="sr-only">Bride's Name</label>
@@ -526,7 +605,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="wedding-date" class="sr-only">Wedding Date</label>
-                <input type="date" id="wedding-date" name="weddingDate" placeholder="Wedding Date *" required>
+                <input type="text" id="wedding-date" name="weddingDate" placeholder="Your Wedding Date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
             </div>
             <div class="form-group">
                 <label for="venue" class="sr-only">Wedding Venue</label>
@@ -537,7 +616,8 @@
         <hr class="form-section-divider">
 
         <!-- CONSULTATION SCHEDULING -->
-        <div class="section-label">Schedule Your Consultation</div>
+        <div class="section-label">Schedule Your Free Consultation</div>
+        <div class="section-subtitle">Pick a time that works for you and I'll confirm via email. Simple as that.</div>
         <div class="form-row">
             <div class="form-group">
                 <label for="preferred-time" class="sr-only">What time works best?</label>
