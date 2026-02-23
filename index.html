@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Consultation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: transparent;
+            color: #2d3748;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 100%;
+            background: transparent;
+            padding: 0;
+        }
+
+        #weddingForm {
+            width: 100%;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 12px;
+        }
+
+        .form-row.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .form-row.two-col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #6b5876;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        label.sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2.5px solid #e8e0ec;
+            border-radius: 24px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fff;
+            line-height: 1.4;
+            transition: all 0.25s ease;
+            -webkit-appearance: none;
+            appearance: none;
+            color: #3a2d40;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #9b8a9f;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select {
+            height: 52px;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+            border-radius: 20px;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a090a8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 14px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 38px;
+            color: #3a2d40;
+        }
+
+        select option {
+            color: #3a2d40;
+        }
+
+        select:invalid,
+        select option[value=""] {
+            color: #bfaec5;
+        }
+
+        input:hover,
+        select:hover,
+        textarea:hover {
+            border-color: #d0c0d6;
+            background: #fff;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #c09acc;
+            background: #fff;
+        }
+
+        /* ── SECTION DIVIDER ── */
+        .form-section-divider {
+            border: none;
+            border-top: 2px solid #e8e0ec;
+            margin: 24px 0;
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            color: #d44aad;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 14px;
+        }
+
+        /* ── SECTION HEADING ── */
+        .section-heading {
+            color: #6b5876;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            margin-bottom: 16px;
+        }
+
+        /* ── CONNECT ROW (select + text permission on one line) ── */
+        .connect-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+
+        .connect-select {
+            margin-bottom: 0;
+        }
+
+        .connect-radios {
+            margin-bottom: 0;
+        }
+
+        .connect-radios-inner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 52px;
+            padding: 0 4px;
+        }
+
+        .connect-radios-inner .radios-label {
+            color: #6b5876;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            margin-bottom: 0;
+        }
+
+        .connect-radios-inner .radio-group {
+            margin-top: 0;
+        }
+
+        /* ── INLINE RADIO GROUP ── */
+        .radio-group {
+            display: flex;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #3a2d40;
+            margin-bottom: 0;
+        }
+
+        .radio-group input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-circle {
+            width: 22px;
+            height: 22px;
+            border: 2.5px solid #d0c0d6;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            font-weight: 700;
+            color: transparent;
+        }
+
+        .radio-group label:hover .radio-circle {
+            border-color: #c09acc;
+        }
+
+        .radio-group input[type="radio"]:checked + .radio-circle {
+            background: #c09acc;
+            border-color: #c09acc;
+            color: #fff;
+        }
+
+        /* ── BUTTON WRAPPER ── */
+        .btn-wrapper {
+            margin-top: 24px;
+        }
+
+        /* ── SUBMIT BUTTON ── */
+        .submit-btn {
+            position: relative;
+            width: 100%;
+            margin: 0;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            border-radius: 999px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            line-height: 1.2;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 97, 213, 0.35);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        }
+
+        /* shine layer */
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.45),
+                transparent
+            );
+            transform: skewX(-20deg);
+            transition: none;
+            pointer-events: none;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(255, 97, 213, 0.5);
+            border-color: #fff;
+        }
+
+        .submit-btn:hover::before {
+            animation: btn-shine 0.6s ease-out forwards;
+        }
+
+        @keyframes btn-shine {
+            0%   { right: 120%; }
+            100% { right: -60%; }
+        }
+
+        .submit-btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 8px rgba(255, 97, 213, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── THANK YOU ── */
+        .thank-you-wrapper {
+            display: none;
+        }
+
+        .thank-you-wrapper.active {
+            display: block;
+        }
+
+        .thank-you {
+            text-align: center;
+            padding: 48px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thank-you h2 {
+            color: #596ac9;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .thank-you p {
+            color: #6b5876;
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+        }
+
+        .celebration-animation {
+            position: relative;
+            margin: 24px 0;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dancing-camera {
+            font-size: 3em;
+            animation: dance 2s ease-in-out infinite;
+            margin: 0 20px;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            25% { transform: translateY(-10px) rotate(5deg); }
+            50% { transform: translateY(-5px) rotate(-3deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: #ff6b6b;
+            font-size: 1.5em;
+            animation: float-up 3s ease-out infinite;
+            opacity: 0;
+        }
+
+        .floating-heart:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { left: 40%; animation-delay: 0.5s; }
+        .floating-heart:nth-child(3) { left: 60%; animation-delay: 1s; }
+        .floating-heart:nth-child(4) { left: 80%; animation-delay: 1.5s; }
+        .floating-heart:nth-child(5) { left: 30%; animation-delay: 2s; }
+        .floating-heart:nth-child(6) { left: 70%; animation-delay: 2.5s; }
+
+        @keyframes float-up {
+            0%   { transform: translateY(50px) scale(0); opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #596ac9;
+            border-radius: 2px;
+            animation: confetti-fall 3s linear infinite;
+            opacity: 0;
+        }
+
+        .confetti-piece:nth-child(odd)  { background: #ff61d5; border-radius: 50%; }
+        .confetti-piece:nth-child(3n)   { background: #4ecdc4; }
+        .confetti-piece:nth-child(4n)   { background: #ffd93d; border-radius: 50%; }
+
+        @keyframes confetti-fall {
+            0%   { transform: translateY(-100px) rotate(0deg);   opacity: 1; }
+            100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 22px;
+                margin-bottom: 22px;
+            }
+
+            .form-group {
+                margin-bottom: 22px;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 0;
+            }
+
+            .connect-row {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .connect-radios-inner {
+                height: auto;
+                flex-wrap: wrap;
+            }
+
+            textarea {
+                min-height: 180px;
+            }
+
+            .submit-btn {
+                font-size: clamp(0.75rem, 3.5vw, 1rem);
+                padding: 16px 20px;
+                white-space: nowrap;
+            }
+
+            .thank-you {
+                padding: 36px 10px;
+            }
+
+            .thank-you h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <form id="weddingForm" action="https://formspree.io/f/movlykze" method="POST">
+        <input type="hidden" name="_subject" value="New Wedding Photography Inquiry">
+        <input type="hidden" name="_cc" value="">
+
+        <!-- COUPLE INFO -->
+        <div class="section-label">About You</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="bride-name" class="sr-only">Bride's Name</label>
+                <input type="text" id="bride-name" name="brideName" placeholder="Bride's Name *" required>
+            </div>
+            <div class="form-group">
+                <label for="groom-name" class="sr-only">Groom's Name</label>
+                <input type="text" id="groom-name" name="groomName" placeholder="Groom's Name *" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="email" class="sr-only">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Email Address *" required>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="sr-only">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Phone Number *" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="wedding-date" class="sr-only">Wedding Date</label>
+                <input type="date" id="wedding-date" name="weddingDate" placeholder="Wedding Date *" required>
+            </div>
+            <div class="form-group">
+                <label for="venue" class="sr-only">Wedding Venue</label>
+                <input type="text" id="venue" name="venue" placeholder="Wedding Venue">
+            </div>
+        </div>
+
+        <hr class="form-section-divider">
+
+        <!-- CONSULTATION SCHEDULING -->
+        <div class="section-label">Schedule Your Consultation</div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="preferred-time" class="sr-only">What time works best?</label>
+                <select id="preferred-time" name="preferredTime">
+                    <option value="">Preferred Consultation Time</option>
+                    <option value="morning">Morning (9am - 12pm)</option>
+                    <option value="afternoon">Afternoon (12pm - 5pm)</option>
+                    <option value="evening">Evening (5pm - 8pm)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="consultation-date" class="sr-only">Preferred Consultation Date</label>
+                <input type="text" id="consultation-date" name="consultationDate" placeholder="Preferred Consultation Date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+            </div>
+        </div>
+
+        <div class="connect-row">
+            <div class="form-group connect-select">
+                <label for="chat-type" class="sr-only">How would you prefer to connect?</label>
+                <select id="chat-type" name="chatType" onchange="togglePhoneField()">
+                    <option value="">How would you like to connect?</option>
+                    <option value="phone">Phone Call</option>
+                    <option value="video">Video Chat</option>
+                </select>
+            </div>
+            <div class="form-group connect-radios">
+                <label class="sr-only">Text permission</label>
+                <div class="connect-radios-inner">
+                    <span class="radios-label">May I text you to confirm?</span>
+                    <div class="radio-group">
+                        <label for="text-yes">
+                            <input type="radio" id="text-yes" name="textPermission" value="yes">
+                            <span class="radio-circle">&#10003;</span>
+                            Yes
+                        </label>
+                        <label for="text-no">
+                            <input type="radio" id="text-no" name="textPermission" value="no">
+                            <span class="radio-circle">&#10003;</span>
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" id="phone-number-group" style="display: none;">
+            <label for="consultation-phone" class="sr-only">Confirm your phone number</label>
+            <input type="tel" id="consultation-phone" name="consultationPhone" placeholder="Best number to reach you at">
+        </div>
+
+        <div class="form-group">
+            <label for="questions-message" class="sr-only">Any questions or special requests?</label>
+            <textarea id="questions-message" name="questionsMessage" placeholder="Tell me anything else you'd like me to know about your special day..."></textarea>
+        </div>
+
+        <div class="btn-wrapper">
+            <button type="submit" class="submit-btn" id="submitButton">
+                Book My FREE Consultation
+            </button>
+        </div>
+    </form>
+
+    <!-- THANK YOU (shown after submit) -->
+    <div class="thank-you-wrapper" id="thankYouWrapper">
+        <div class="thank-you">
+            <div class="floating-hearts">
+                <div class="floating-heart">&#128149;</div>
+                <div class="floating-heart">&#128150;</div>
+                <div class="floating-heart">&#128149;</div>
+                <div class="floating-heart">&#128150;</div>
+                <div class="floating-heart">&#128149;</div>
+                <div class="floating-heart">&#128150;</div>
+            </div>
+            <div class="confetti">
+                <div class="confetti-piece" style="left:10%;animation-delay:0s;"></div>
+                <div class="confetti-piece" style="left:20%;animation-delay:0.2s;"></div>
+                <div class="confetti-piece" style="left:30%;animation-delay:0.4s;"></div>
+                <div class="confetti-piece" style="left:40%;animation-delay:0.6s;"></div>
+                <div class="confetti-piece" style="left:50%;animation-delay:0.8s;"></div>
+                <div class="confetti-piece" style="left:60%;animation-delay:1s;"></div>
+                <div class="confetti-piece" style="left:70%;animation-delay:1.2s;"></div>
+                <div class="confetti-piece" style="left:80%;animation-delay:1.4s;"></div>
+                <div class="confetti-piece" style="left:90%;animation-delay:1.6s;"></div>
+                <div class="confetti-piece" style="left:15%;animation-delay:1.8s;"></div>
+                <div class="confetti-piece" style="left:35%;animation-delay:2s;"></div>
+                <div class="confetti-piece" style="left:55%;animation-delay:2.2s;"></div>
+                <div class="confetti-piece" style="left:75%;animation-delay:2.4s;"></div>
+                <div class="confetti-piece" style="left:85%;animation-delay:2.6s;"></div>
+            </div>
+
+            <h2>Thank You!</h2>
+
+            <div class="celebration-animation">
+                <div class="dancing-camera">&#128248;</div>
+            </div>
+
+            <p>Hi &#128075;&#127995; I've received your consultation request and I'm really excited about the possibility of working together! I'll be in touch as soon as I review your email. Looking forward to chatting with you!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ── PHONE FIELD TOGGLE ── */
+    function togglePhoneField() {
+        var chatType = document.getElementById('chat-type');
+        var phoneGroup = document.getElementById('phone-number-group');
+        var consultationPhone = document.getElementById('consultation-phone');
+        var originalPhone = document.getElementById('phone');
+
+        if (chatType && phoneGroup && consultationPhone && originalPhone) {
+            if (chatType.value === 'phone') {
+                phoneGroup.style.display = 'block';
+                if (originalPhone.value && !consultationPhone.value) {
+                    consultationPhone.value = originalPhone.value;
+                }
+            } else {
+                phoneGroup.style.display = 'none';
+            }
+        }
+    }
+
+    window.togglePhoneField = togglePhoneField;
+
+    /* ── FORM SUBMISSION ── */
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var form = document.getElementById('weddingForm');
+        if (!form) return false;
+
+        // Validate required fields
+        var requiredFields = form.querySelectorAll('input[required]');
+        for (var i = 0; i < requiredFields.length; i++) {
+            if (!requiredFields[i].value.trim()) {
+                requiredFields[i].focus();
+                requiredFields[i].style.borderColor = '#e74c3c';
+                (function(field) {
+                    setTimeout(function() {
+                        field.style.borderColor = '#e8e0ec';
+                    }, 3000);
+                })(requiredFields[i]);
+                return false;
+            }
+        }
+
+        var btn = document.getElementById('submitButton');
+        if (btn) {
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+        }
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(function(response) {
+            if (response.ok) {
+                form.style.display = 'none';
+                var thankYou = document.getElementById('thankYouWrapper');
+                if (thankYou) {
+                    thankYou.classList.add('active');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert('Oops! There was a problem submitting your form. Please try again.');
+                if (btn) {
+                    btn.textContent = 'Book My FREE Consultation';
+                    btn.disabled = false;
+                }
+            }
+        }).catch(function(error) {
+            alert('Oops! There was a problem submitting your form. Please try again.');
+            if (btn) {
+                btn.textContent = 'Book My FREE Consultation';
+                btn.disabled = false;
+            }
+        });
+
+        return false;
+    }
+
+    /* ── INIT ── */
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-format phone numbers as user types: 908-335-4847
+        function formatPhone() {
+            var digits = this.value.replace(/\D/g, '').substring(0, 10);
+            if (digits.length > 6) {
+                this.value = digits.substring(0, 3) + '-' + digits.substring(3, 6) + '-' + digits.substring(6);
+            } else if (digits.length > 3) {
+                this.value = digits.substring(0, 3) + '-' + digits.substring(3);
+            } else {
+                this.value = digits;
+            }
+        }
+        document.getElementById('phone').addEventListener('input', formatPhone);
+        document.getElementById('consultation-phone').addEventListener('input', formatPhone);
+
+        var form = document.getElementById('weddingForm');
+        if (form) {
+            form.addEventListener('submit', handleFormSubmit);
+        }
+    });
+</script>
+
+</body>
+</html>
