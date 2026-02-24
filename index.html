@@ -413,6 +413,37 @@
             transform: none;
         }
 
+        /* ── BUTTON TEXT TOGGLE ── */
+        .btn-mobile-text {
+            display: none;
+        }
+
+        .btn-mobile-text {
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            width: 100%;
+        }
+
+        .btn-line-top {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .btn-divider {
+            width: 60%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.45);
+            margin: 6px auto;
+        }
+
+        .btn-line-bottom {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            opacity: 0.95;
+        }
+
         /* ── THANK YOU ── */
         .thank-you-wrapper {
             display: none;
@@ -563,10 +594,17 @@
                 min-height: 180px;
             }
 
+            .btn-desktop-text {
+                display: none;
+            }
+
+            .btn-mobile-text {
+                display: flex;
+            }
+
             .submit-btn {
-                font-size: clamp(0.75rem, 3.5vw, 1rem);
-                padding: 16px 20px;
-                white-space: nowrap;
+                padding: 14px 28px;
+                white-space: normal;
             }
 
             .thank-you {
@@ -692,7 +730,12 @@
 
         <div class="btn-wrapper">
             <button type="submit" class="submit-btn" id="submitButton">
-                Book + Unlock $100 Credit
+                <span class="btn-desktop-text">Book + Unlock $100 Credit</span>
+                <span class="btn-mobile-text">
+                    <span class="btn-line-top">Book my FREE Consultation</span>
+                    <span class="btn-divider"></span>
+                    <span class="btn-line-bottom">Unlock $100 Credit</span>
+                </span>
             </button>
         </div>
     </form>
@@ -806,7 +849,7 @@
             } else {
                 alert('Oops! There was a problem submitting your form. Please try again.');
                 if (btn) {
-                    btn.textContent = 'Book + Unlock $100 Credit';
+                    btn.innerHTML = '<span class="btn-desktop-text">Book + Unlock $100 Credit</span><span class="btn-mobile-text"><span class="btn-line-top">Book my FREE Consultation</span><span class="btn-divider"></span><span class="btn-line-bottom">Unlock $100 Credit</span></span>';
                     btn.disabled = false;
                 }
             }
