@@ -340,12 +340,12 @@
         .btn-wrapper {
             margin-top: 24px;
             overflow: visible;
+            text-align: center;
         }
 
         /* ── SUBMIT BUTTON ── */
         .submit-btn {
             position: relative;
-            width: 100%;
             margin: 0;
             padding: 14px 20px;
             background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
@@ -684,7 +684,7 @@
 
         <div class="btn-wrapper">
             <button type="submit" class="submit-btn" id="submitButton">
-                Book My FREE Consultation
+                Book Consultation + Unlock $100 Credit
             </button>
         </div>
     </form>
@@ -798,14 +798,14 @@
             } else {
                 alert('Oops! There was a problem submitting your form. Please try again.');
                 if (btn) {
-                    btn.textContent = 'Book My FREE Consultation';
+                    btn.textContent = 'Book Consultation + Unlock $100 Credit';
                     btn.disabled = false;
                 }
             }
         }).catch(function(error) {
             alert('Oops! There was a problem submitting your form. Please try again.');
             if (btn) {
-                btn.textContent = 'Book My FREE Consultation';
+                btn.textContent = 'Book Consultation + Unlock $100 Credit';
                 btn.disabled = false;
             }
         });
@@ -833,6 +833,20 @@
         if (form) {
             form.addEventListener('submit', handleFormSubmit);
         }
+
+        // Shorten placeholder/option text on mobile
+        function updateMobileLabels() {
+            var mobile = window.innerWidth <= 600;
+            var timeOption = document.querySelector('#preferred-time option[value=""]');
+            var dateInput = document.getElementById('consultation-date');
+            var chatOption = document.querySelector('#chat-type option[value=""]');
+
+            if (timeOption) timeOption.textContent = mobile ? 'Preferred Time' : 'Preferred Consultation Time';
+            if (dateInput && !dateInput.value) dateInput.placeholder = mobile ? 'Preferred Date' : 'Preferred Consultation Date';
+            if (chatOption) chatOption.textContent = mobile ? 'Phone or Video Chat?' : 'How would you like to connect?';
+        }
+        updateMobileLabels();
+        window.addEventListener('resize', updateMobileLabels);
     });
 
     /* =============================================
