@@ -525,8 +525,16 @@
             100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
         }
 
+        .mobile-break {
+            display: none;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 600px) {
+            .mobile-break {
+                display: block;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
                 gap: 22px;
@@ -625,7 +633,7 @@
         <hr class="form-section-divider">
 
         <!-- CONSULTATION SCHEDULING -->
-        <div class="section-label">Schedule Your Free Consultation</div>
+        <div class="section-label">Schedule Your <br class="mobile-break">Free Consultation</div>
         <div class="section-subtitle">Pick a time that works for you and I'll confirm via email. Simple as that.</div>
         <div class="form-row">
             <div class="form-group">
@@ -684,7 +692,7 @@
 
         <div class="btn-wrapper">
             <button type="submit" class="submit-btn" id="submitButton">
-                Book Consultation + Unlock $100 Credit
+                Book + Unlock $100 Credit
             </button>
         </div>
     </form>
@@ -798,14 +806,14 @@
             } else {
                 alert('Oops! There was a problem submitting your form. Please try again.');
                 if (btn) {
-                    btn.textContent = 'Book Consultation + Unlock $100 Credit';
+                    btn.textContent = 'Book + Unlock $100 Credit';
                     btn.disabled = false;
                 }
             }
         }).catch(function(error) {
             alert('Oops! There was a problem submitting your form. Please try again.');
             if (btn) {
-                btn.textContent = 'Book Consultation + Unlock $100 Credit';
+                btn.textContent = 'Book + Unlock $100 Credit';
                 btn.disabled = false;
             }
         });
