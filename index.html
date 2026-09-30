@@ -1,931 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule a Consultation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            margin: 0 !important;
-            padding: 0 !important;
-            height: auto !important;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: transparent;
-            color: #2d3748;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 100%;
-            background: transparent;
-            padding: 20px;
-            overflow: visible;
-        }
-
-        #weddingForm {
-            width: 100%;
-            overflow: visible;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 12px;
-        }
-
-        .form-row.three-col {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-
-        .form-row.two-col {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-row .form-group {
-            margin-bottom: 0;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #6b5876;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
-        }
-
-        label.sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 14px 20px;
-            border: 2.5px solid #e8e0ec;
-            border-radius: 24px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: #fff;
-            line-height: 1.4;
-            transition: all 0.25s ease;
-            -webkit-appearance: none;
-            appearance: none;
-            color: #3a2d40;
-        }
-
-        input::placeholder,
-        textarea::placeholder {
-            color: #9b8a9f;
-            font-weight: 400;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="date"],
-        select {
-            height: 52px;
-        }
-
-        textarea {
-            min-height: 110px;
-            resize: vertical;
-            border-radius: 20px;
-        }
-
-        select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a090a8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 14px center;
-            background-repeat: no-repeat;
-            background-size: 16px;
-            padding-right: 38px;
-            color: #3a2d40;
-        }
-
-        select option {
-            color: #3a2d40;
-        }
-
-        select:invalid,
-        select option[value=""] {
-            color: #bfaec5;
-        }
-
-        input:hover,
-        select:hover,
-        textarea:hover {
-            border-color: #d0c0d6;
-            background: #fff;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #c09acc;
-            background: #fff;
-        }
-
-        /* ── SECTION DIVIDER ── */
-        .form-section-divider {
-            border: none;
-            border-top: 2px solid #e8e0ec;
-            margin: 24px 0;
-        }
-
-        /* ── CREDIT CHECKBOX ── */
-        .credit-checkbox-wrapper {
-            width: 100%;
-            margin-bottom: 18px;
-        }
-
-        .credit-checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            padding: 14px 20px;
-            border: 2.5px solid #e8e0ec;
-            border-radius: 24px;
-            background: #d4daff;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-size: 0.95rem;
-            color: #3a2d40;
-            font-weight: 500;
-        }
-
-        .credit-checkbox-label:hover {
-            border-color: #c09acc;
-        }
-
-        .credit-checkbox-wrapper input[type="checkbox"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .credit-check-circle {
-            width: 22px;
-            height: 22px;
-            border: 2.5px solid #d0c0d6;
-            border-radius: 50%;
-            flex-shrink: 0;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            font-size: 12px;
-            font-weight: 700;
-            color: transparent;
-        }
-
-        .credit-checkbox-wrapper input[type="checkbox"]:checked + .credit-checkbox-label .credit-check-circle {
-            background: #c09acc;
-            border-color: #c09acc;
-            color: #fff;
-        }
-
-        .credit-checkbox-wrapper input[type="checkbox"]:checked + .credit-checkbox-label {
-            border-color: #c09acc;
-        }
-
-        /* ── SECTION LABEL ── */
-        .section-label {
-            color: #d44aad;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        .section-label + .section-subtitle {
-            color: #9b8a9f;
-            font-size: 0.85rem;
-            font-weight: 400;
-            margin-bottom: 14px;
-        }
-
-        .section-label:not(:has(+ .section-subtitle)) {
-            margin-bottom: 14px;
-        }
-
-        /* ── SECTION HEADING ── */
-        .section-heading {
-            color: #6b5876;
-            font-weight: 700;
-            font-size: 1.05rem;
-            letter-spacing: 0.02em;
-            margin-bottom: 16px;
-        }
-
-        /* ── CONNECT ROW (select + text permission on one line) ── */
-        .connect-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            align-items: end;
-            margin-bottom: 12px;
-        }
-
-        .connect-select {
-            margin-bottom: 0;
-        }
-
-        .connect-radios {
-            margin-bottom: 0;
-        }
-
-        .connect-radios-inner {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            height: 52px;
-            padding: 0 4px;
-        }
-
-        .connect-radios-inner .radios-label {
-            color: #6b5876;
-            font-weight: 600;
-            font-size: 0.85rem;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            margin-bottom: 0;
-        }
-
-        .connect-radios-inner .radio-group {
-            margin-top: 0;
-        }
-
-        /* ── INLINE RADIO GROUP ── */
-        .radio-group {
-            display: flex;
-            gap: 24px;
-            margin-top: 8px;
-        }
-
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #3a2d40;
-            margin-bottom: 0;
-        }
-
-        .radio-group input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .radio-circle {
-            width: 22px;
-            height: 22px;
-            border: 2.5px solid #d0c0d6;
-            border-radius: 50%;
-            flex-shrink: 0;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            font-size: 12px;
-            font-weight: 700;
-            color: transparent;
-        }
-
-        .radio-group label:hover .radio-circle {
-            border-color: #c09acc;
-        }
-
-        .radio-group input[type="radio"]:checked + .radio-circle {
-            background: #c09acc;
-            border-color: #c09acc;
-            color: #fff;
-        }
-
-        /* ── BUTTON WRAPPER ── */
-        .btn-wrapper {
-            margin-top: 24px;
-            overflow: visible;
-            text-align: center;
-        }
-
-        /* ── SUBMIT BUTTON ── */
-        .submit-btn {
-            position: relative;
-            margin: 0;
-            padding: 14px 20px;
-            background: linear-gradient(135deg, #ff61d5 0%, #ff8de0 40%, #ff61d5 100%);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.7);
-            border-radius: 999px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            line-height: 1.2;
-            font-family: inherit;
-            letter-spacing: 0.02em;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-            box-shadow: none;
-            text-shadow: none;
-        }
-
-        /* shine layer */
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 120%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.45),
-                transparent
-            );
-            transform: skewX(-20deg);
-            transition: none;
-            pointer-events: none;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: none;
-            border-color: #fff;
-        }
-
-        .submit-btn:hover::before {
-            animation: btn-shine 0.6s ease-out forwards;
-        }
-
-        @keyframes btn-shine {
-            0%   { right: 120%; }
-            100% { right: -60%; }
-        }
-
-        .submit-btn:active {
-            transform: translateY(0px);
-            box-shadow: none;
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ── BUTTON TEXT TOGGLE ── */
-        .btn-desktop-text {
-            display: none;
-        }
-
-        .btn-mobile-text {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0;
-            width: 100%;
-        }
-
-        .btn-line-top {
-            font-size: 1.05rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .btn-divider {
-            width: 60%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.45);
-            margin: 5px auto;
-        }
-
-        .btn-line-bottom {
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            opacity: 0.95;
-        }
-
-        /* ── THANK YOU ── */
-        .thank-you-wrapper {
-            display: none;
-        }
-
-        .thank-you-wrapper.active {
-            display: block;
-        }
-
-        .thank-you {
-            text-align: center;
-            padding: 48px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .thank-you h2 {
-            color: #596ac9;
-            margin-bottom: 20px;
-            font-size: 2rem;
-            line-height: 1.2;
-            font-weight: 700;
-        }
-
-        .thank-you p {
-            color: #6b5876;
-            font-size: 1rem;
-            line-height: 1.7;
-            max-width: 500px;
-            margin: 0 auto 30px auto;
-        }
-
-        .celebration-animation {
-            position: relative;
-            margin: 24px 0;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .dancing-camera {
-            font-size: 3em;
-            animation: dance 2s ease-in-out infinite;
-            margin: 0 20px;
-        }
-
-        @keyframes dance {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            25% { transform: translateY(-10px) rotate(5deg); }
-            50% { transform: translateY(-5px) rotate(-3deg); }
-            75% { transform: translateY(-15px) rotate(3deg); }
-        }
-
-        .floating-hearts {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .floating-heart {
-            position: absolute;
-            color: #ff6b6b;
-            font-size: 1.5em;
-            animation: float-up 3s ease-out infinite;
-            opacity: 0;
-        }
-
-        .floating-heart:nth-child(1) { left: 20%; animation-delay: 0s; }
-        .floating-heart:nth-child(2) { left: 40%; animation-delay: 0.5s; }
-        .floating-heart:nth-child(3) { left: 60%; animation-delay: 1s; }
-        .floating-heart:nth-child(4) { left: 80%; animation-delay: 1.5s; }
-        .floating-heart:nth-child(5) { left: 30%; animation-delay: 2s; }
-        .floating-heart:nth-child(6) { left: 70%; animation-delay: 2.5s; }
-
-        @keyframes float-up {
-            0%   { transform: translateY(50px) scale(0); opacity: 0; }
-            10%  { opacity: 1; }
-            90%  { opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.2); opacity: 0; }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #596ac9;
-            border-radius: 2px;
-            animation: confetti-fall 3s linear infinite;
-            opacity: 0;
-        }
-
-        .confetti-piece:nth-child(odd)  { background: #ff61d5; border-radius: 50%; }
-        .confetti-piece:nth-child(3n)   { background: #4ecdc4; }
-        .confetti-piece:nth-child(4n)   { background: #ffd93d; border-radius: 50%; }
-
-        @keyframes confetti-fall {
-            0%   { transform: translateY(-100px) rotate(0deg);   opacity: 1; }
-            100% { transform: translateY(200px) rotate(720deg); opacity: 0; }
-        }
-
-        .mobile-break {
-            display: none;
-        }
-
-        /* ── RESPONSIVE ── */
-        @media (max-width: 600px) {
-            .mobile-break {
-                display: block;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 22px;
-                margin-bottom: 22px;
-            }
-
-            .form-group {
-                margin-bottom: 22px;
-            }
-
-            .form-row .form-group {
-                margin-bottom: 0;
-            }
-
-            .connect-row {
-                grid-template-columns: 1fr;
-                gap: 22px;
-            }
-
-            .connect-radios-inner {
-                height: auto;
-                flex-wrap: wrap;
-            }
-
-            textarea {
-                min-height: 180px;
-            }
-
-            .submit-btn {
-                padding: 10px 24px;
-                white-space: normal;
-            }
-
-            .btn-line-top {
-                font-size: 0.85rem;
-            }
-
-            .btn-divider {
-                margin: 4px auto;
-            }
-
-            .btn-line-bottom {
-                font-size: 0.7rem;
-            }
-
-            .thank-you {
-                padding: 36px 10px;
-            }
-
-            .thank-you h2 {
-                font-size: 1.6rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedule a Consultation | Ryan Sands Photography</title>
+<style>
+  :root { --p:#6a5ed0; --p2:#8a7ef2; --tint:#f6f4ff; --tint2:#eceaff; --ink:#1c1917; --ink4:#57534e; --muted:#78716c;
+    --border:rgba(106,94,208,.16); --field:#e4e0f5; }
+  *,*::before,*::after { box-sizing:border-box; }
+  html,body { margin:0; padding:0; background:transparent; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink); -webkit-text-size-adjust:100%; }
+  #consultation-form-root { padding:24px 16px 32px; }
+  .wrap { max-width:760px; margin:0 auto; }
+
+  /* Form card */
+  .card { background:#fff; border:1px solid var(--border); border-radius:24px; padding:22px; box-shadow:0 10px 30px rgba(45,42,58,.08); }
+  @media (max-width:600px){ .card { padding:18px 14px; } }
+  .optin { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:14px; cursor:pointer;
+    background:linear-gradient(135deg,var(--tint),var(--tint2)); border:1px solid rgba(106,94,208,.22); font-size:15px; font-weight:700; line-height:1.4; color:var(--ink); }
+  .optin input { position:absolute; opacity:0; width:1px; height:1px; }
+  .box { flex:none; display:grid; place-items:center; width:24px; height:24px; border-radius:7px; border:2px solid var(--p); background:#fff; color:#fff; font-size:14px; font-weight:900; transition:background .15s; }
+  .optin input:checked + .box { background:linear-gradient(135deg,var(--p2),var(--p)); border-color:var(--p); }
+  .optin input:not(:checked) + .box span { visibility:hidden; }
+  .optin input:focus-visible + .box { outline:2px solid var(--p2); outline-offset:2px; }
+
+  .sec { margin-top:22px; }
+  .sec h2 { display:flex; align-items:center; gap:10px; margin:0 0 4px; font-size:20px; font-weight:700; line-height:1.25; }
+  .sec .sub { margin:0 0 12px; font-size:14.5px; line-height:1.5; color:var(--ink4); }
+  .sec h2 + .grid { margin-top:12px; }
+  .h-emoji { display:grid; place-items:center; width:36px; height:36px; border-radius:12px; background:var(--tint2); color:var(--p); }
+  .h-emoji svg { width:20px; height:20px; }
+  .sec .sub { padding-left:46px; }
+  @media (max-width:600px){ .sec .sub { padding-left:0; } }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .full { grid-column:1 / -1; }
+  @media (max-width:600px){ .grid { grid-template-columns:1fr; } }
+
+  input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea {
+    display:block; width:100%; min-height:50px; margin:0; padding:13px 14px; border:1.5px solid var(--field); border-radius:14px; background:#fcfbff;
+    font:inherit; font-size:16px; color:var(--ink); line-height:1.3; -webkit-appearance:none; appearance:none; transition:border-color .15s, box-shadow .15s; }
+  input::placeholder,textarea::placeholder { color:#8f8a86; opacity:1; }
+  select { padding-right:40px; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236a5ed0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 15px center; }
+  select:invalid { color:#8f8a86; }
+  select option { color:var(--ink); }
+  textarea { min-height:110px; resize:vertical; }
+  input:focus,select:focus,textarea:focus { outline:none; border-color:var(--p); box-shadow:0 0 0 3px rgba(106,94,208,.15); }
+  .err { border-color:#e5484d !important; box-shadow:0 0 0 3px rgba(229,72,77,.12) !important; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+  .yn { display:flex; align-items:center; gap:10px; flex-wrap:wrap; min-height:50px; padding:8px 8px 8px 14px; border:1.5px solid var(--field); border-radius:12px; }
+  .yn-q { flex:1; min-width:170px; font-size:15.5px; color:var(--ink); }
+  .yn-opts { display:flex; gap:8px; }
+  .pill { position:relative; }
+  .pill input { position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
+  .pill span { display:block; padding:8px 18px; border-radius:999px; background:var(--tint); border:1.5px solid transparent; font-size:14.5px; font-weight:700; color:var(--ink4); transition:all .15s; }
+  .pill input:checked + span { background:linear-gradient(135deg,var(--p2),var(--p)); color:#fff; }
+  .pill input:focus-visible + span { border-color:var(--p2); }
+  #phone-number-group { display:none; }
+
+  .submit { position:relative; display:block; width:100%; margin-top:20px; padding:16px 18px; border:0; border-radius:14px; cursor:pointer;
+    background:linear-gradient(135deg,var(--p2),var(--p)); color:#fff; font:inherit; text-align:center;
+    box-shadow:0 10px 24px rgba(106,94,208,.32); transition:transform .15s, box-shadow .15s; }
+  .submit .l1 { display:block; font-size:18px; font-weight:800; line-height:1.25; }
+  .submit .l2 { display:block; margin-top:3px; font-size:14px; font-weight:600; opacity:.92; }
+  @media (hover:hover){ .submit:hover { transform:translateY(-1px); box-shadow:0 14px 28px rgba(106,94,208,.38); } }
+  .submit:disabled { opacity:.7; cursor:default; transform:none; }
+  .fine { margin:10px 0 0; text-align:center; font-size:13px; color:var(--muted); }
+
+  .intro { display:grid; grid-template-columns:128px minmax(0,1fr); margin:0 0 18px; border-radius:20px; overflow:hidden;
+    border:1px solid rgba(106,94,208,.18); box-shadow:0 10px 26px rgba(106,94,208,.12); }
+  .intro-amt { position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:18px 8px; color:#fff; text-align:center;
+    background:radial-gradient(90% 70% at 50% 0%, rgba(255,255,255,.20) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg,var(--p2) 0%,var(--p) 60%,#5a4cc0 100%); }
+  .intro-amt svg { width:22px; height:22px; opacity:.9; }
+  .intro-amt b { position:relative; font-size:36px; line-height:1; font-weight:800; letter-spacing:-.02em; }
+  .intro-amt b sup { position:absolute; right:100%; top:3px; margin-right:1px; font-size:17px; line-height:1; font-weight:700; }
+  .intro-amt small { font-size:10.5px; font-weight:800; letter-spacing:.16em; margin-right:-.16em; text-transform:uppercase; opacity:.9; }
+  .intro-copy { padding:18px 20px; background:linear-gradient(180deg,#fff 0%,var(--tint) 100%); }
+  .intro-k { display:inline-block; margin:0 0 6px; padding:4px 10px; border-radius:999px; background:var(--tint2); color:var(--p); font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+  .intro h2 { margin:0 0 6px; font-size:19px; font-weight:800; line-height:1.25; color:var(--ink); }
+  .intro p { margin:0; font-size:15px; line-height:1.55; color:var(--ink4); }
+  .intro b.hl { color:var(--p); }
+  @media (max-width:600px){ .intro { grid-template-columns:96px minmax(0,1fr); } .intro-amt b { font-size:28px; } .intro-amt b sup { font-size:14px; top:2px; }
+    .intro-copy { padding:15px 14px; } .intro h2 { font-size:17px; } .intro p { font-size:14.5px; } }
+  .ig-offer { display:flex; align-items:center; gap:14px; max-width:460px; margin:24px auto 0; padding:16px; border-radius:16px; text-align:left; background:var(--tint); }
+  .ig-offer .h-emoji { flex:none; width:44px; height:44px; background:#fff; }
+  @media (max-width:600px){ .ig-offer { gap:12px; padding:14px; } .ig-offer .h-emoji { width:40px; height:40px; } .ig { font-size:13.5px; padding:8px 12px; } }
+  .ig-offer p { margin:0; font-size:14.5px; line-height:1.5; }
+  .ig-offer strong { color:var(--ink); }
+  .ig { display:inline-flex; align-items:center; gap:6px; margin-top:8px; padding:8px 14px; border-radius:999px; text-decoration:none;
+    background:linear-gradient(135deg,var(--p2),var(--p)); color:#fff; font-size:14px; font-weight:700; }
+  .ig svg { width:16px; height:16px; }
+  /* Thank you */
+  #thankYouWrapper { display:none; text-align:center; padding:36px 18px 30px; }
+  #thankYouWrapper.active { display:block; }
+  .ty-icon { display:grid; place-items:center; width:70px; height:70px; margin:0 auto 14px; border-radius:50%; font-size:32px;
+    background:linear-gradient(135deg,var(--tint),var(--tint2)); }
+  #thankYouWrapper h2 { margin:0 0 10px; font-size:28px; }
+  #thankYouWrapper p { max-width:460px; margin:0 auto; font-size:16px; line-height:1.6; color:var(--ink4); }
+</style>
 </head>
 <body>
+<div id="consultation-form-root">
+  <div class="wrap">
 
-<div class="form-container" id="consultation-form-root">
-    <form id="weddingForm" action="https://formspree.io/f/movlykze" method="POST">
+
+
+    <div class="card">
+      <form id="weddingForm" action="https://formspree.io/f/movlykze" method="POST" novalidate>
         <input type="hidden" name="_subject" value="New Wedding Photography Inquiry">
         <input type="hidden" name="_cc" value="">
 
-        <!-- CREDIT CHECKBOX -->
-        <div class="credit-checkbox-wrapper">
-            <input type="checkbox" id="credit-booking" name="creditBooking" value="yes" checked>
-            <label for="credit-booking" class="credit-checkbox-label">
-                <span class="credit-check-circle">&#10003;</span>
-                Yes, I'd like to book my free consultation and earn a $100 credit.
-            </label>
+        <div class="intro">
+          <div class="intro-amt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M2.5 9h19v-1a1 1 0 0 0-1-1h-17a1 1 0 0 0-1 1z"/><path d="M12 7v13.5"/><path d="M12 7c-1.5-3.5-5.5-3.5-5.5-1.2C6.5 7 9 7 12 7zm0 0c1.5-3.5 5.5-3.5 5.5-1.2C17.5 7 15 7 12 7z"/></svg>
+            <b><sup>$</sup>100</b>
+            <small>Credit</small>
+          </div>
+          <div class="intro-copy">
+            <span class="intro-k">Free Consultation</span>
+            <h2>Come hang out!</h2>
+            <p>We'll talk about your big day, I'll answer every question, and you'll score <b class="hl">$100 in credit</b>. It's a win/win 👍</p>
+          </div>
         </div>
 
-        <!-- COUPLE INFO -->
-        <div class="section-label">Your Details</div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="bride-name" class="sr-only">Bride's Name</label>
-                <input type="text" id="bride-name" name="brideName" placeholder="Bride's Name *" required>
-            </div>
-            <div class="form-group">
-                <label for="groom-name" class="sr-only">Groom's Name</label>
-                <input type="text" id="groom-name" name="groomName" placeholder="Groom's Name *" required>
-            </div>
+        <label class="optin">
+          <input type="checkbox" name="creditBooking" value="yes" checked>
+          <span class="box" aria-hidden="true"><span>✓</span></span>
+          <span>Yes, I'd like to book my free consultation and earn a $100 credit.</span>
+        </label>
+
+        <div class="sec">
+          <h2><span class="h-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M10.5 3.5h3L15 6l-3 2.5L9 6z"/></svg></span>Your Details</h2>
+          <div class="grid">
+            <div><label class="sr" for="bride">Bride's Name</label><input id="bride" type="text" name="brideName" placeholder="Bride's Name *" autocomplete="off" required></div>
+            <div><label class="sr" for="groom">Groom's Name</label><input id="groom" type="text" name="groomName" placeholder="Groom's Name *" autocomplete="off" required></div>
+            <div><label class="sr" for="email">Email Address</label><input id="email" type="email" name="email" placeholder="Email Address *" autocomplete="email" required></div>
+            <div><label class="sr" for="phone">Phone Number</label><input id="phone" type="tel" name="phone" placeholder="Phone Number *" autocomplete="tel" inputmode="tel" required></div>
+            <div><label class="sr" for="wedding-date">Wedding Date</label><input id="wedding-date" type="text" name="weddingDate" placeholder="Your Wedding Date" class="datefield"></div>
+            <div><label class="sr" for="venue">Wedding Venue</label><input id="venue" type="text" name="venue" placeholder="Wedding Venue"></div>
+          </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="email" class="sr-only">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Email Address *" required>
+        <div class="sec">
+          <h2><span class="h-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/><path d="M9.5 15l2 2 3.5-3.5"/></svg></span>Schedule Your Free Consultation</h2>
+          <p class="sub">Pick a time that works for you and I'll confirm via email. Simple as that.</p>
+          <div class="grid">
+            <div>
+              <label class="sr" for="preferred-time">What time works best?</label>
+              <select id="preferred-time" name="preferredTime" required>
+                <option value="" disabled selected>Preferred Consultation Time</option>
+                <option value="morning">Morning (9am - 12pm)</option>
+                <option value="afternoon">Afternoon (12pm - 5pm)</option>
+                <option value="evening">Evening (5pm - 8pm)</option>
+              </select>
             </div>
-            <div class="form-group">
-                <label for="phone" class="sr-only">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Phone Number *" required>
+            <div><label class="sr" for="consultation-date">Preferred Consultation Date</label><input id="consultation-date" type="text" name="consultationDate" placeholder="Preferred Consultation Date" class="datefield"></div>
+            <div class="full">
+              <label class="sr" for="chat-type">How would you prefer to connect?</label>
+              <select id="chat-type" name="chatType" required>
+                <option value="" disabled selected>How would you like to connect?</option>
+                <option value="phone">Phone Call</option>
+                <option value="video">Video Chat</option>
+              </select>
             </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="wedding-date" class="sr-only">Wedding Date</label>
-                <input type="text" id="wedding-date" name="weddingDate" placeholder="Your Wedding Date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
+            <div class="full" id="phone-number-group">
+              <label class="sr" for="consultation-phone">Best number to reach you at</label>
+              <input id="consultation-phone" type="tel" name="consultationPhone" placeholder="Best number to reach you at" inputmode="tel">
             </div>
-            <div class="form-group">
-                <label for="venue" class="sr-only">Wedding Venue</label>
-                <input type="text" id="venue" name="venue" placeholder="Wedding Venue">
-            </div>
-        </div>
-
-        <hr class="form-section-divider">
-
-        <!-- CONSULTATION SCHEDULING -->
-        <div class="section-label">Schedule Your <br class="mobile-break">Free Consultation</div>
-        <div class="section-subtitle">Pick a time that works for you and I'll confirm via email. Simple as that.</div>
-        <div class="form-row">
-            <div class="form-group">
-                <label for="preferred-time" class="sr-only">What time works best?</label>
-                <select id="preferred-time" name="preferredTime">
-                    <option value="">Preferred Consultation Time</option>
-                    <option value="morning">Morning (9am - 12pm)</option>
-                    <option value="afternoon">Afternoon (12pm - 5pm)</option>
-                    <option value="evening">Evening (5pm - 8pm)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="consultation-date" class="sr-only">Preferred Consultation Date</label>
-                <input type="text" id="consultation-date" name="consultationDate" placeholder="Preferred Consultation Date" onfocus="this.type='date'" onblur="if(!this.value)this.type='text'">
-            </div>
-        </div>
-
-        <div class="connect-row">
-            <div class="form-group connect-select">
-                <label for="chat-type" class="sr-only">How would you prefer to connect?</label>
-                <select id="chat-type" name="chatType" onchange="togglePhoneField()">
-                    <option value="">How would you like to connect?</option>
-                    <option value="phone">Phone Call</option>
-                    <option value="video">Video Chat</option>
-                </select>
-            </div>
-            <div class="form-group connect-radios">
-                <label class="sr-only">Text permission</label>
-                <div class="connect-radios-inner">
-                    <span class="radios-label">May I text you to confirm?</span>
-                    <div class="radio-group">
-                        <label for="text-yes">
-                            <input type="radio" id="text-yes" name="textPermission" value="yes">
-                            <span class="radio-circle">&#10003;</span>
-                            Yes
-                        </label>
-                        <label for="text-no">
-                            <input type="radio" id="text-no" name="textPermission" value="no">
-                            <span class="radio-circle">&#10003;</span>
-                            No
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group" id="phone-number-group" style="display: none;">
-            <label for="consultation-phone" class="sr-only">Confirm your phone number</label>
-            <input type="tel" id="consultation-phone" name="consultationPhone" placeholder="Best number to reach you at">
-        </div>
-
-        <div class="form-group">
-            <label for="questions-message" class="sr-only">Any questions or special requests?</label>
-            <textarea id="questions-message" name="questionsMessage" placeholder="Tell me anything else you'd like me to know about your special day..."></textarea>
-        </div>
-
-        <div class="btn-wrapper">
-            <button type="submit" class="submit-btn" id="submitButton">
-                <span class="btn-desktop-text">Book + Unlock $100 Credit</span>
-                <span class="btn-mobile-text">
-                    <span class="btn-line-top">Book my FREE Consultation</span>
-                    <span class="btn-divider"></span>
-                    <span class="btn-line-bottom">Unlock $100 Credit</span>
+            <div class="full">
+              <div class="yn" role="radiogroup" aria-label="Text permission">
+                <span class="yn-q">May I text you to confirm?</span>
+                <span class="yn-opts">
+                  <label class="pill"><input type="radio" name="textPermission" value="yes"><span>Yes</span></label>
+                  <label class="pill"><input type="radio" name="textPermission" value="no"><span>No</span></label>
                 </span>
-            </button>
+              </div>
+            </div>
+            <div class="full">
+              <label class="sr" for="msg">Any questions or special requests?</label>
+              <textarea id="msg" name="questionsMessage" placeholder="Tell me anything else you'd like me to know about your special day..."></textarea>
+            </div>
+          </div>
         </div>
-    </form>
 
-    <!-- THANK YOU (shown after submit) -->
-    <div class="thank-you-wrapper" id="thankYouWrapper">
-        <div class="thank-you">
-            <div class="floating-hearts">
-                <div class="floating-heart">&#128149;</div>
-                <div class="floating-heart">&#128150;</div>
-                <div class="floating-heart">&#128149;</div>
-                <div class="floating-heart">&#128150;</div>
-                <div class="floating-heart">&#128149;</div>
-                <div class="floating-heart">&#128150;</div>
-            </div>
-            <div class="confetti">
-                <div class="confetti-piece" style="left:10%;animation-delay:0s;"></div>
-                <div class="confetti-piece" style="left:20%;animation-delay:0.2s;"></div>
-                <div class="confetti-piece" style="left:30%;animation-delay:0.4s;"></div>
-                <div class="confetti-piece" style="left:40%;animation-delay:0.6s;"></div>
-                <div class="confetti-piece" style="left:50%;animation-delay:0.8s;"></div>
-                <div class="confetti-piece" style="left:60%;animation-delay:1s;"></div>
-                <div class="confetti-piece" style="left:70%;animation-delay:1.2s;"></div>
-                <div class="confetti-piece" style="left:80%;animation-delay:1.4s;"></div>
-                <div class="confetti-piece" style="left:90%;animation-delay:1.6s;"></div>
-                <div class="confetti-piece" style="left:15%;animation-delay:1.8s;"></div>
-                <div class="confetti-piece" style="left:35%;animation-delay:2s;"></div>
-                <div class="confetti-piece" style="left:55%;animation-delay:2.2s;"></div>
-                <div class="confetti-piece" style="left:75%;animation-delay:2.4s;"></div>
-                <div class="confetti-piece" style="left:85%;animation-delay:2.6s;"></div>
-            </div>
+        <button type="submit" class="submit" id="submitButton">
+          <span class="l1">Book my FREE Consultation</span>
+          <span class="l2">Unlock $100 Credit</span>
+        </button>
+      </form>
 
-            <h2>Thank You!</h2>
-
-            <div class="celebration-animation">
-                <div class="dancing-camera">&#128248;</div>
-            </div>
-
-            <p>Hi &#128075;&#127995; I've received your consultation request and I'm really excited about the possibility of working together! I'll be in touch as soon as I review your email. Looking forward to chatting with you!</p>
+      <div id="thankYouWrapper" role="status" aria-live="polite">
+        <div class="ty-icon" aria-hidden="true">📸</div>
+        <h2>Thank You!</h2>
+        <p>Hi 👋🏻 I've received your consultation request and I'm really excited about the possibility of working together! I'll be in touch as soon as I review your email. Looking forward to chatting with you!</p>
+        <div class="ig-offer">
+          <span class="h-emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor"/></svg></span>
+          <div>
+            <p><strong>Want another $25 credit?</strong> Earn a $25 credit simply for following me on Instagram.</p>
+            <a class="ig" href="https://www.instagram.com/ryansandsphotography/" target="_blank" rel="noopener">@ryansandsphotography <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          </div>
         </div>
+      </div>
     </div>
+
+  </div>
 </div>
 
 <script>
-    /* ── PHONE FIELD TOGGLE ── */
-    function togglePhoneField() {
-        var chatType = document.getElementById('chat-type');
-        var phoneGroup = document.getElementById('phone-number-group');
-        var consultationPhone = document.getElementById('consultation-phone');
-        var originalPhone = document.getElementById('phone');
+(function(){
+  var form = document.getElementById('weddingForm');
+  var btn = document.getElementById('submitButton');
+  var btnHTML = btn.innerHTML;
 
-        if (chatType && phoneGroup && consultationPhone && originalPhone) {
-            if (chatType.value === 'phone') {
-                phoneGroup.style.display = 'block';
-                if (originalPhone.value && !consultationPhone.value) {
-                    consultationPhone.value = originalPhone.value;
-                }
-            } else {
-                phoneGroup.style.display = 'none';
-            }
-        }
+  /* Date fields show a placeholder until tapped */
+  [].forEach.call(document.querySelectorAll('.datefield'), function(el){
+    el.addEventListener('focus', function(){ this.type = 'date'; });
+    el.addEventListener('blur', function(){ if(!this.value) this.type = 'text'; });
+  });
+
+  /* Phone formatting: 908-335-4847 */
+  function formatPhone(){
+    var d = this.value.replace(/\D/g,'').substring(0,10);
+    this.value = d.length > 6 ? d.slice(0,3)+'-'+d.slice(3,6)+'-'+d.slice(6) : d.length > 3 ? d.slice(0,3)+'-'+d.slice(3) : d;
+  }
+  document.getElementById('phone').addEventListener('input', formatPhone);
+  document.getElementById('consultation-phone').addEventListener('input', formatPhone);
+
+  /* Show consultation phone field only for phone calls */
+  var chat = document.getElementById('chat-type');
+  chat.addEventListener('change', function(){
+    var g = document.getElementById('phone-number-group'), cp = document.getElementById('consultation-phone');
+    if (chat.value === 'phone') { g.style.display = 'block'; if (!cp.value) cp.value = document.getElementById('phone').value; }
+    else g.style.display = 'none';
+  });
+
+  /* Shorter labels on small screens */
+  function labels(){
+    var m = window.innerWidth <= 600;
+    document.querySelector('#preferred-time option[value=""]').textContent = m ? 'Preferred Time' : 'Preferred Consultation Time';
+    document.querySelector('#chat-type option[value=""]').textContent = m ? 'Phone or Video Chat?' : 'How would you like to connect?';
+    var cd = document.getElementById('consultation-date'); if (!cd.value) cd.placeholder = m ? 'Preferred Date' : 'Preferred Consultation Date';
+  }
+  labels(); window.addEventListener('resize', labels);
+
+  /* Submit to Formspree */
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var req = form.querySelectorAll('input[required]');
+    for (var i = 0; i < req.length; i++) {
+      var f = req[i], bad = !f.value.trim() || (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value));
+      if (bad) {
+        f.classList.add('err'); f.focus();
+        f.addEventListener('input', function h(){ this.classList.remove('err'); this.removeEventListener('input', h); });
+        return;
+      }
     }
+    btn.disabled = true; btn.innerHTML = '<span class="l1">Sending...</span><span class="l2">One moment</span>';
+    fetch(form.action, { method:'POST', body:new FormData(form), headers:{ 'Accept':'application/json' } })
+      .then(function(r){
+        if (!r.ok) throw new Error();
+        form.style.display = 'none';
+        document.getElementById('thankYouWrapper').classList.add('active');
+        window.parent.postMessage({ scrollToCalc: true }, '*');
+      })
+      .catch(function(){
+        alert('Oops! There was a problem submitting your form. Please try again.');
+        btn.disabled = false; btn.innerHTML = btnHTML;
+      });
+  });
 
-    window.togglePhoneField = togglePhoneField;
-
-    /* ── FORM SUBMISSION ── */
-    function handleFormSubmit(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        var form = document.getElementById('weddingForm');
-        if (!form) return false;
-
-        // Validate required fields
-        var requiredFields = form.querySelectorAll('input[required]');
-        for (var i = 0; i < requiredFields.length; i++) {
-            if (!requiredFields[i].value.trim()) {
-                requiredFields[i].focus();
-                requiredFields[i].style.borderColor = '#e74c3c';
-                (function(field) {
-                    setTimeout(function() {
-                        field.style.borderColor = '#e8e0ec';
-                    }, 3000);
-                })(requiredFields[i]);
-                return false;
-            }
-        }
-
-        var btn = document.getElementById('submitButton');
-        if (btn) {
-            btn.textContent = 'Sending...';
-            btn.disabled = true;
-        }
-
-        var formData = new FormData(form);
-
-        fetch(form.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(function(response) {
-            if (response.ok) {
-                form.style.display = 'none';
-                var thankYou = document.getElementById('thankYouWrapper');
-                if (thankYou) {
-                    thankYou.classList.add('active');
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                alert('Oops! There was a problem submitting your form. Please try again.');
-                if (btn) {
-                    btn.innerHTML = '<span class="btn-desktop-text">Book + Unlock $100 Credit</span><span class="btn-mobile-text"><span class="btn-line-top">Book my FREE Consultation</span><span class="btn-divider"></span><span class="btn-line-bottom">Unlock $100 Credit</span></span>';
-                    btn.disabled = false;
-                }
-            }
-        }).catch(function(error) {
-            alert('Oops! There was a problem submitting your form. Please try again.');
-            if (btn) {
-                btn.textContent = 'Book + Unlock $100 Credit';
-                btn.disabled = false;
-            }
-        });
-
-        return false;
-    }
-
-    /* ── INIT ── */
-    document.addEventListener('DOMContentLoaded', function() {
-        // Auto-format phone numbers as user types: 908-335-4847
-        function formatPhone() {
-            var digits = this.value.replace(/\D/g, '').substring(0, 10);
-            if (digits.length > 6) {
-                this.value = digits.substring(0, 3) + '-' + digits.substring(3, 6) + '-' + digits.substring(6);
-            } else if (digits.length > 3) {
-                this.value = digits.substring(0, 3) + '-' + digits.substring(3);
-            } else {
-                this.value = digits;
-            }
-        }
-        document.getElementById('phone').addEventListener('input', formatPhone);
-        document.getElementById('consultation-phone').addEventListener('input', formatPhone);
-
-        var form = document.getElementById('weddingForm');
-        if (form) {
-            form.addEventListener('submit', handleFormSubmit);
-        }
-
-        // Shorten placeholder/option text on mobile
-        function updateMobileLabels() {
-            var mobile = window.innerWidth <= 600;
-            var timeOption = document.querySelector('#preferred-time option[value=""]');
-            var dateInput = document.getElementById('consultation-date');
-            var chatOption = document.querySelector('#chat-type option[value=""]');
-
-            if (timeOption) timeOption.textContent = mobile ? 'Preferred Time' : 'Preferred Consultation Time';
-            if (dateInput && !dateInput.value) dateInput.placeholder = mobile ? 'Preferred Date' : 'Preferred Consultation Date';
-            if (chatOption) chatOption.textContent = mobile ? 'Phone or Video Chat?' : 'How would you like to connect?';
-        }
-        updateMobileLabels();
-        window.addEventListener('resize', updateMobileLabels);
-    });
-
-    /* =============================================
-       IFRAME HEIGHT COMMUNICATION (for Showit embed)
-       ============================================= */
-    function sendHeight() {
-        var root = document.getElementById('consultation-form-root');
-        root.style.height = 'auto';
-        document.body.style.height = 'auto';
-        document.documentElement.style.height = 'auto';
-        void root.offsetHeight;
-        var h = Math.max(root.scrollHeight, root.offsetHeight, document.body.scrollHeight);
-        h = Math.ceil(h);
-        window.parent.postMessage({calcHeight: h}, '*');
-    }
-    window.addEventListener('load', function() {
-        sendHeight();
-        setInterval(sendHeight, 300);
-        var observer = new MutationObserver(function() { setTimeout(sendHeight, 0); });
-        observer.observe(document.getElementById('consultation-form-root'), {childList: true, subtree: true});
-    });
+  /* Tell the Showit page how tall to make the iframe */
+  var root = document.getElementById('consultation-form-root'), last = 0;
+  function sendHeight(){
+    var h = Math.ceil(root.getBoundingClientRect().height);
+    if (h !== last) { last = h; window.parent.postMessage({ calcHeight: h }, '*'); }
+  }
+  window.addEventListener('load', sendHeight);
+  window.addEventListener('resize', sendHeight);
+  if (window.ResizeObserver) new ResizeObserver(sendHeight).observe(root); else setInterval(sendHeight, 300);
+  sendHeight();
+})();
 </script>
-
 </body>
 </html>
