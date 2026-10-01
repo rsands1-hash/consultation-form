@@ -33,9 +33,10 @@
   .intro-copy { padding:18px 22px; background:#fff; }
   .intro-copy h2 { margin:0 0 6px; font-family:Montserrat,Arial,sans-serif; font-weight:800; font-size:26px; line-height:1.05; text-transform:uppercase; color:var(--ink); }
   .intro-copy p { margin:0; font-weight:300; font-size:17px; line-height:1.5; color:var(--grey); }
-  .intro-copy .hl { font-weight:500; color:var(--blue); }
-  @media (max-width:600px){ .intro { grid-template-columns:100px minmax(0,1fr); } .intro-amt b { font-size:32px; } .intro-amt b sup { font-size:15px; top:3px; }
-    .intro-copy { padding:14px; } .intro-copy h2 { font-size:21px; } .intro-copy p { font-size:15.5px; } }
+  .intro-copy .hl { font-weight:500; color:var(--blue); white-space:nowrap; }
+  /* Phones: drop the blue $100 tile, keep the heading and text */
+  @media (max-width:600px){ .intro { grid-template-columns:1fr; } .intro-amt { display:none; }
+    .intro-copy { padding:16px; text-align:center; } .intro-copy h2 { font-size:24px; } .intro-copy p { font-size:16px; } }
 
   /* Opt-in */
   .optin { display:flex; align-items:center; gap:14px; padding:14px 16px; cursor:pointer; background:var(--tint); border-left:4px solid var(--blue);
